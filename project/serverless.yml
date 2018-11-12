@@ -1,0 +1,23 @@
+service: "template-python"
+
+plugins:
+- serverless-python-requirements
+- "@kalarrs/serverless-project-utils"
+
+provider:
+  name: aws
+  runtime: python3.6
+  memorySize: 128
+  region: us-west-2
+
+functions:
+  createUser:
+    handler: handler.create_user
+    events:
+    - http:
+        path: users/create
+        method: post
+
+custom:
+  pythonRequirements:
+    dockerizePip: false
